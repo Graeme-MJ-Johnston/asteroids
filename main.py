@@ -1,10 +1,11 @@
 # dont forget source venv/bin/activate
 
-# Imports
 import pygame
-from constants import *
-from player import *
 from circleshape import *
+from player import *
+from constants import *
+
+
 
 def main():
     pygame.init

@@ -1,6 +1,8 @@
+
 import pygame
-from player import *
-from circleshape import *
+from main import *
+
+
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
