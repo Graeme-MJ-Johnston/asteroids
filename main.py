@@ -52,7 +52,7 @@ def main():
             
         #Checking for collisions
         for roid in asteroids:
-            if player.super().collide(roid):
+            if player.collide(roid):
                 print("Game over!")
                 sys.exit()
             
