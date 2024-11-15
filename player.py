@@ -2,12 +2,13 @@
 import pygame
 from constants import *
 from circleshape import *
-from main import *
+from shot import Shot
 
 
 class Player(CircleShape):
     def __init__(self, x, y):
         self.rotation = 0
+        self.gun_heat = 0
         super().__init__(x, y, PLAYER_RADIUS)
         
         
@@ -27,6 +28,7 @@ class Player(CircleShape):
         
     def update(self, dt):
         keys = pygame.key.get_pressed()
+        self.gun_heat -= dt
 
         if keys[pygame.K_a]:
             self.rotate(-dt)
@@ -36,10 +38,16 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(-dt)
-    
-    #def player_collision(self, target):
-    #    return super().collide(target)
+        if keys[pygame.K_SPACE]:
+            if self.gun_heat <= 0:
+                self.shoot()
             
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
+        
+    def shoot(self):
+        selfvec = self.position
+        bullet = Shot(selfvec.x, selfvec.y, SHOT_RADIUS)
+        bullet.velocity = pygame.Vector2(0,1).rotate(self.rotation) * PLAYER_SHOT_SPEED
+        self.gun_heat = PLAYER_SHOOT_COOLDOWN

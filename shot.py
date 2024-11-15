@@ -1,14 +1,16 @@
+
 import pygame
+import constants
 from circleshape import CircleShape
 
 
 
-class Asteroid(CircleShape):
+
+class Shot(CircleShape):
     def __init__(self, x, y, radius):
-        #self.x = x
-        #self.y = y
-    
         super().__init__(x, y, radius)
+        rotation = 0
+        
         
     def update(self, dt):
         self.position += self.velocity * dt
